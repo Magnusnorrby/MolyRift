@@ -1,0 +1,378 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CAPI\CAPI_DistortionRenderer.cpp" />
+    <ClCompile Include="CAPI\CAPI_FrameTimeManager.cpp" />
+    <ClCompile Include="CAPI\CAPI_HMDRenderState.cpp" />
+    <ClCompile Include="CAPI\CAPI_HMDState.cpp" />
+    <ClCompile Include="CAPI\CAPI_HSWDisplay.cpp" />
+    <ClCompile Include="CAPI\CAPI_LatencyStatistics.cpp" />
+    <ClCompile Include="CAPI\D3D1X\CAPI_D3D10_DistortionRenderer.cpp" />
+    <ClCompile Include="CAPI\D3D1X\CAPI_D3D10_HSWDisplay.cpp" />
+    <ClCompile Include="CAPI\D3D1X\CAPI_D3D11_DistortionRenderer.cpp" />
+    <ClCompile Include="CAPI\D3D1X\CAPI_D3D11_HSWDisplay.cpp" />
+    <ClCompile Include="CAPI\D3D1X\CAPI_D3D1X_DistortionRenderer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="CAPI\D3D1X\CAPI_D3D1X_HSWDisplay.cpp" />
+    <ClCompile Include="CAPI\D3D1X\CAPI_D3D1X_Util.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="CAPI\D3D9\CAPI_D3D9_DistortionRenderer.cpp" />
+    <ClCompile Include="CAPI\D3D9\CAPI_D3D9_HSWDisplay.cpp" />
+    <ClCompile Include="CAPI\D3D9\CAPI_D3D9_Util.cpp" />
+    <ClCompile Include="CAPI\GL\CAPI_GLE.cpp" />
+    <ClCompile Include="CAPI\GL\CAPI_GL_DistortionRenderer.cpp" />
+    <ClCompile Include="CAPI\GL\CAPI_GL_HSWDisplay.cpp" />
+    <ClCompile Include="CAPI\GL\CAPI_GL_Util.cpp" />
+    <ClCompile Include="Displays\OVR_Display.cpp" />
+    <ClCompile Include="Displays\OVR_Win32_Display.cpp" />
+    <ClCompile Include="Displays\OVR_Win32_FocusReader.cpp" />
+    <ClCompile Include="Displays\OVR_Win32_RenderShim.cpp" />
+    <ClCompile Include="Displays\OVR_Win32_ShimFunctions.cpp" />
+    <ClCompile Include="Kernel\OVR_Alg.cpp" />
+    <ClCompile Include="Kernel\OVR_Allocator.cpp" />
+    <ClCompile Include="Kernel\OVR_Atomic.cpp" />
+    <ClCompile Include="Kernel\OVR_CRC32.cpp" />
+    <ClCompile Include="Kernel\OVR_DebugHelp.cpp" />
+    <ClCompile Include="Kernel\OVR_File.cpp" />
+    <ClCompile Include="Kernel\OVR_FileFILE.cpp" />
+    <ClCompile Include="Kernel\OVR_Lockless.cpp" />
+    <ClCompile Include="Kernel\OVR_Log.cpp" />
+    <ClCompile Include="Kernel\OVR_Math.cpp" />
+    <ClCompile Include="Kernel\OVR_RefCount.cpp" />
+    <ClCompile Include="Kernel\OVR_SharedMemory.cpp" />
+    <ClCompile Include="Kernel\OVR_Std.cpp" />
+    <ClCompile Include="Kernel\OVR_String.cpp" />
+    <ClCompile Include="Kernel\OVR_String_FormatUtil.cpp" />
+    <ClCompile Include="Kernel\OVR_String_PathUtil.cpp" />
+    <ClCompile Include="Kernel\OVR_SysFile.cpp" />
+    <ClCompile Include="Kernel\OVR_System.cpp" />
+    <ClCompile Include="Kernel\OVR_ThreadCommandQueue.cpp" />
+    <ClCompile Include="Kernel\OVR_ThreadsWinAPI.cpp" />
+    <ClCompile Include="Kernel\OVR_Timer.cpp" />
+    <ClCompile Include="Kernel\OVR_UTF8Util.cpp" />
+    <ClCompile Include="MolyRift.cpp" />
+    <ClCompile Include="Net\OVR_BitStream.cpp" />
+    <ClCompile Include="Net\OVR_NetworkPlugin.cpp" />
+    <ClCompile Include="Net\OVR_PacketizedTCPSocket.cpp" />
+    <ClCompile Include="Net\OVR_RPC1.cpp" />
+    <ClCompile Include="Net\OVR_Session.cpp" />
+    <ClCompile Include="Net\OVR_Socket.cpp" />
+    <ClCompile Include="Net\OVR_Win32_Socket.cpp" />
+    <ClCompile Include="OVR_CAPI.cpp" />
+    <ClCompile Include="OVR_JSON.cpp" />
+    <ClCompile Include="OVR_Profile.cpp" />
+    <ClCompile Include="OVR_Stereo.cpp" />
+    <ClCompile Include="Service\Service_NetClient.cpp" />
+    <ClCompile Include="Service\Service_NetSessionCommon.cpp" />
+    <ClCompile Include="Tracking\Tracking_SensorStateReader.cpp" />
+    <ClCompile Include="Util\Util_ImageWindow.cpp" />
+    <ClCompile Include="Util\Util_Interface.cpp" />
+    <ClCompile Include="Util\Util_LatencyTest2Reader.cpp" />
+    <ClCompile Include="Util\Util_Render_Stereo.cpp" />
+    <ClCompile Include="Util\Util_SystemGUI.cpp" />
+    <ClCompile Include="Util\Util_SystemInfo.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="app.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BodyBasics.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BodyBasics.h" />
+    <ClInclude Include="CAPI\CAPI_DistortionRenderer.h" />
+    <ClInclude Include="CAPI\CAPI_FrameTimeManager.h" />
+    <ClInclude Include="CAPI\CAPI_HMDRenderState.h" />
+    <ClInclude Include="CAPI\CAPI_HMDState.h" />
+    <ClInclude Include="CAPI\CAPI_HSWDisplay.h" />
+    <ClInclude Include="CAPI\CAPI_LatencyStatistics.h" />
+    <ClInclude Include="CAPI\D3D1X\CAPI_D3D10_DistortionRenderer.h" />
+    <ClInclude Include="CAPI\D3D1X\CAPI_D3D10_HSWDisplay.h" />
+    <ClInclude Include="CAPI\D3D1X\CAPI_D3D11_DistortionRenderer.h" />
+    <ClInclude Include="CAPI\D3D1X\CAPI_D3D11_HSWDisplay.h" />
+    <ClInclude Include="CAPI\D3D1X\CAPI_D3D1X_DistortionRenderer.h" />
+    <ClInclude Include="CAPI\D3D1X\CAPI_D3D1X_HSWDisplay.h" />
+    <ClInclude Include="CAPI\D3D1X\CAPI_D3D1X_Util.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\DistortionChroma_ps.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\DistortionChroma_ps_refl.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\DistortionChroma_vs.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\DistortionChroma_vs_refl.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\DistortionCS2x2.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\DistortionCS2x2_refl.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\DistortionTimewarpChroma_vs.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\DistortionTimewarpChroma_vs_refl.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\DistortionTimewarp_vs.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\DistortionTimewarp_vs_refl.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\Distortion_ps.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\Distortion_ps_refl.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\Distortion_vs.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\Distortion_vs_refl.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\SimpleQuad_ps.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\SimpleQuad_ps_refl.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\SimpleQuad_vs.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\SimpleQuad_vs_refl.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\SimpleTexturedQuad_ps.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\SimpleTexturedQuad_ps_refl.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\SimpleTexturedQuad_vs.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\SimpleTexturedQuad_vs_refl.h" />
+    <ClInclude Include="CAPI\D3D9\CAPI_D3D9_DistortionRenderer.h" />
+    <ClInclude Include="CAPI\D3D9\CAPI_D3D9_HSWDisplay.h" />
+    <ClInclude Include="CAPI\GL\CAPI_GLE.h" />
+    <ClInclude Include="CAPI\GL\CAPI_GLE_GL.h" />
+    <ClInclude Include="CAPI\GL\CAPI_GL_DistortionRenderer.h" />
+    <ClInclude Include="CAPI\GL\CAPI_GL_DistortionShaders.h" />
+    <ClInclude Include="CAPI\GL\CAPI_GL_HSWDisplay.h" />
+    <ClInclude Include="CAPI\GL\CAPI_GL_Util.h" />
+    <ClInclude Include="CAPI\Textures\healthAndSafety.tga.h" />
+    <ClInclude Include="Displays\OVR_Display.h" />
+    <ClInclude Include="Displays\OVR_Win32_Display.h" />
+    <ClInclude Include="Displays\OVR_Win32_Dxgi_Display.h" />
+    <ClInclude Include="Displays\OVR_Win32_FocusReader.h" />
+    <ClInclude Include="Displays\OVR_Win32_ShimFunctions.h" />
+    <ClInclude Include="Displays\OVR_Win32_ShimVersion.h" />
+    <ClInclude Include="Kernel\OVR_Alg.h" />
+    <ClInclude Include="Kernel\OVR_Allocator.h" />
+    <ClInclude Include="Kernel\OVR_Array.h" />
+    <ClInclude Include="Kernel\OVR_Atomic.h" />
+    <ClInclude Include="Kernel\OVR_Color.h" />
+    <ClInclude Include="Kernel\OVR_Compiler.h" />
+    <ClInclude Include="Kernel\OVR_ContainerAllocator.h" />
+    <ClInclude Include="Kernel\OVR_CRC32.h" />
+    <ClInclude Include="Kernel\OVR_DebugHelp.h" />
+    <ClInclude Include="Kernel\OVR_Delegates.h" />
+    <ClInclude Include="Kernel\OVR_Deque.h" />
+    <ClInclude Include="Kernel\OVR_File.h" />
+    <ClInclude Include="Kernel\OVR_Hash.h" />
+    <ClInclude Include="Kernel\OVR_KeyCodes.h" />
+    <ClInclude Include="Kernel\OVR_List.h" />
+    <ClInclude Include="Kernel\OVR_Lockless.h" />
+    <ClInclude Include="Kernel\OVR_Log.h" />
+    <ClInclude Include="Kernel\OVR_mach_exc_OSX.h" />
+    <ClInclude Include="Kernel\OVR_Math.h" />
+    <ClInclude Include="Kernel\OVR_Nullptr.h" />
+    <ClInclude Include="Kernel\OVR_Observer.h" />
+    <ClInclude Include="Kernel\OVR_RefCount.h" />
+    <ClInclude Include="Kernel\OVR_SharedMemory.h" />
+    <ClInclude Include="Kernel\OVR_Std.h" />
+    <ClInclude Include="Kernel\OVR_String.h" />
+    <ClInclude Include="Kernel\OVR_StringHash.h" />
+    <ClInclude Include="Kernel\OVR_SysFile.h" />
+    <ClInclude Include="Kernel\OVR_System.h" />
+    <ClInclude Include="Kernel\OVR_ThreadCommandQueue.h" />
+    <ClInclude Include="Kernel\OVR_Threads.h" />
+    <ClInclude Include="Kernel\OVR_Timer.h" />
+    <ClInclude Include="Kernel\OVR_Types.h" />
+    <ClInclude Include="Kernel\OVR_UTF8Util.h" />
+    <ClInclude Include="Net\OVR_BitStream.h" />
+    <ClInclude Include="Net\OVR_MessageIDTypes.h" />
+    <ClInclude Include="Net\OVR_NetworkPlugin.h" />
+    <ClInclude Include="Net\OVR_NetworkTypes.h" />
+    <ClInclude Include="Net\OVR_PacketizedTCPSocket.h" />
+    <ClInclude Include="Net\OVR_RPC1.h" />
+    <ClInclude Include="Net\OVR_Session.h" />
+    <ClInclude Include="Net\OVR_Socket.h" />
+    <ClInclude Include="Net\OVR_Win32_Socket.h" />
+    <ClInclude Include="OVR_CAPI.h" />
+    <ClInclude Include="OVR_CAPI_D3D.h" />
+    <ClInclude Include="OVR_CAPI_GL.h" />
+    <ClInclude Include="OVR_CAPI_Keys.h" />
+    <ClInclude Include="OVR_JSON.h" />
+    <ClInclude Include="OVR_Profile.h" />
+    <ClInclude Include="OVR_SerialFormat.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Sensors\OVR_DeviceConstants.h" />
+    <ClInclude Include="Service\Service_NetClient.h" />
+    <ClInclude Include="Service\Service_NetSessionCommon.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Tracking\Tracking_PoseState.h" />
+    <ClInclude Include="Tracking\Tracking_SensorState.h" />
+    <ClInclude Include="Tracking\Tracking_SensorStateReader.h" />
+    <ClInclude Include="Util\Util_ImageWindow.h" />
+    <ClInclude Include="Util\Util_Interface.h" />
+    <ClInclude Include="Util\Util_LatencyTest2Reader.h" />
+    <ClInclude Include="Util\Util_LatencyTest2State.h" />
+    <ClInclude Include="Util\Util_Render_Stereo.h" />
+    <ClInclude Include="Util\Util_SystemGUI.h" />
+    <ClInclude Include="Util\Util_SystemInfo.h" />
+    <ClInclude Include="Win32_DX11AppUtil.h" />
+    <ClInclude Include="Win32_RoomTiny_AppRender.h" />
+    <ClInclude Include="Win32_RoomTiny_ExampleFeatures.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CAPI\D3D1X\Shaders\bin2header.exe" />
+    <None Include="CAPI\D3D1X\Shaders\DistortionChroma_ps.psh" />
+    <None Include="CAPI\D3D1X\Shaders\DistortionChroma_vs.vsh" />
+    <None Include="CAPI\D3D1X\Shaders\DistortionCS2x2.csh" />
+    <None Include="CAPI\D3D1X\Shaders\DistortionTimewarpChroma_vs.vsh" />
+    <None Include="CAPI\D3D1X\Shaders\DistortionTimewarp_vs.vsh" />
+    <None Include="CAPI\D3D1X\Shaders\Distortion_ps.psh" />
+    <None Include="CAPI\D3D1X\Shaders\Distortion_vs.vsh" />
+    <None Include="CAPI\D3D1X\Shaders\genComputeShaderHeader.bat" />
+    <None Include="CAPI\D3D1X\Shaders\genPixelShaderHeader.bat" />
+    <None Include="CAPI\D3D1X\Shaders\genVertexShaderHeader.bat" />
+    <None Include="CAPI\D3D1X\Shaders\ShaderReflector.exe" />
+    <None Include="CAPI\D3D1X\Shaders\ShaderReflector.pdb" />
+    <None Include="CAPI\D3D1X\Shaders\SimpleQuad_ps.psh" />
+    <None Include="CAPI\D3D1X\Shaders\SimpleQuad_vs.vsh" />
+    <None Include="CAPI\D3D1X\Shaders\SimpleTexturedQuad_ps.psh" />
+    <None Include="CAPI\D3D1X\Shaders\SimpleTexturedQuad_vs.vsh" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6E5E35A2-7A3B-4671-AD85-B39DC5D710C9}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>BodyBasics-D2D</RootNamespace>
+    <ProjectName>MolyRift</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(KINECTSDK20_DIR)\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>$(KINECTSDK20_DIR)\lib\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(KINECTSDK20_DIR)\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>$(KINECTSDK20_DIR)\lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(KINECTSDK20_DIR)\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>$(KINECTSDK20_DIR)\lib\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(KINECTSDK20_DIR)\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>$(KINECTSDK20_DIR)\lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <AdditionalDependencies>kinect20.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <AdditionalDependencies>kinect20.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;Ws2_32.lib;setupapi.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;WINMM.lib;dxgi.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <AdditionalDependencies>kinect20.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <AdditionalDependencies>kinect20.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;Ws2_32.lib;setupapi.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;WINMM.lib;dxgi.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

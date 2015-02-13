@@ -1,0 +1,629 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="BodyBasics.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="CAPI\D3D1X\Shaders\Distortion_ps.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\Distortion_ps_refl.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\Distortion_vs.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\Distortion_vs_refl.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\DistortionChroma_ps.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\DistortionChroma_ps_refl.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\DistortionChroma_vs.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\DistortionChroma_vs_refl.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\DistortionCS2x2.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\DistortionCS2x2_refl.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\DistortionTimewarp_vs.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\DistortionTimewarp_vs_refl.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\DistortionTimewarpChroma_vs.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\DistortionTimewarpChroma_vs_refl.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\SimpleQuad_ps.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\SimpleQuad_ps_refl.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\SimpleQuad_vs.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\SimpleQuad_vs_refl.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\SimpleTexturedQuad_ps.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\SimpleTexturedQuad_ps_refl.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\SimpleTexturedQuad_vs.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\Shaders\SimpleTexturedQuad_vs_refl.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="OVR_CAPI.h" />
+    <ClInclude Include="OVR_CAPI_D3D.h" />
+    <ClInclude Include="OVR_CAPI_GL.h" />
+    <ClInclude Include="OVR_CAPI_Keys.h" />
+    <ClInclude Include="OVR_JSON.h" />
+    <ClInclude Include="OVR_Profile.h" />
+    <ClInclude Include="OVR_SerialFormat.h" />
+    <ClInclude Include="Win32_RoomTiny_ExampleFeatures.h" />
+    <ClInclude Include="Win32_RoomTiny_AppRender.h" />
+    <ClInclude Include="Win32_DX11AppUtil.h" />
+    <ClInclude Include="Util\Util_ImageWindow.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Util_Interface.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Util_LatencyTest2Reader.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Util_LatencyTest2State.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Util_Render_Stereo.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Util_SystemGUI.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Util_SystemInfo.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Tracking\Tracking_PoseState.h">
+      <Filter>Tracking</Filter>
+    </ClInclude>
+    <ClInclude Include="Tracking\Tracking_SensorState.h">
+      <Filter>Tracking</Filter>
+    </ClInclude>
+    <ClInclude Include="Tracking\Tracking_SensorStateReader.h">
+      <Filter>Tracking</Filter>
+    </ClInclude>
+    <ClInclude Include="Service\Service_NetClient.h">
+      <Filter>Service</Filter>
+    </ClInclude>
+    <ClInclude Include="Service\Service_NetSessionCommon.h">
+      <Filter>Service</Filter>
+    </ClInclude>
+    <ClInclude Include="Sensors\OVR_DeviceConstants.h">
+      <Filter>Sensors</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\OVR_BitStream.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\OVR_MessageIDTypes.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\OVR_NetworkPlugin.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\OVR_NetworkTypes.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\OVR_PacketizedTCPSocket.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\OVR_RPC1.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\OVR_Session.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\OVR_Socket.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\OVR_Win32_Socket.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_Alg.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_Allocator.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_Array.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_Atomic.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_Color.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_Compiler.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_ContainerAllocator.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_CRC32.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_DebugHelp.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_Delegates.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_Deque.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_File.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_Hash.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_KeyCodes.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_List.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_Lockless.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_Log.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_mach_exc_OSX.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_Math.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_Nullptr.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_Observer.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_RefCount.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_SharedMemory.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_Std.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_String.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_StringHash.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_SysFile.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_System.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_ThreadCommandQueue.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_Threads.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_Timer.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_Types.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\OVR_UTF8Util.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Displays\OVR_Display.h">
+      <Filter>Displays</Filter>
+    </ClInclude>
+    <ClInclude Include="Displays\OVR_Win32_Display.h">
+      <Filter>Displays</Filter>
+    </ClInclude>
+    <ClInclude Include="Displays\OVR_Win32_Dxgi_Display.h">
+      <Filter>Displays</Filter>
+    </ClInclude>
+    <ClInclude Include="Displays\OVR_Win32_FocusReader.h">
+      <Filter>Displays</Filter>
+    </ClInclude>
+    <ClInclude Include="Displays\OVR_Win32_ShimFunctions.h">
+      <Filter>Displays</Filter>
+    </ClInclude>
+    <ClInclude Include="Displays\OVR_Win32_ShimVersion.h">
+      <Filter>Displays</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\CAPI_DistortionRenderer.h">
+      <Filter>CAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\CAPI_FrameTimeManager.h">
+      <Filter>CAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\CAPI_HMDRenderState.h">
+      <Filter>CAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\CAPI_HMDState.h">
+      <Filter>CAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\CAPI_HSWDisplay.h">
+      <Filter>CAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\CAPI_LatencyStatistics.h">
+      <Filter>CAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\Textures\healthAndSafety.tga.h">
+      <Filter>CAPI\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\GL\CAPI_GL_DistortionRenderer.h">
+      <Filter>CAPI\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\GL\CAPI_GL_DistortionShaders.h">
+      <Filter>CAPI\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\GL\CAPI_GL_HSWDisplay.h">
+      <Filter>CAPI\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\GL\CAPI_GL_Util.h">
+      <Filter>CAPI\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\GL\CAPI_GLE.h">
+      <Filter>CAPI\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\GL\CAPI_GLE_GL.h">
+      <Filter>CAPI\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D9\CAPI_D3D9_DistortionRenderer.h">
+      <Filter>CAPI\D3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D9\CAPI_D3D9_HSWDisplay.h">
+      <Filter>CAPI\D3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\CAPI_D3D1X_DistortionRenderer.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\CAPI_D3D1X_HSWDisplay.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\CAPI_D3D1X_Util.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\CAPI_D3D10_DistortionRenderer.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\CAPI_D3D10_HSWDisplay.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\CAPI_D3D11_DistortionRenderer.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CAPI\D3D1X\CAPI_D3D11_HSWDisplay.h">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BodyBasics.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="app.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MolyRift.cpp" />
+    <ClCompile Include="OVR_CAPI.cpp" />
+    <ClCompile Include="OVR_JSON.cpp" />
+    <ClCompile Include="OVR_Profile.cpp" />
+    <ClCompile Include="OVR_Stereo.cpp" />
+    <ClCompile Include="Util\Util_ImageWindow.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Util_Interface.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Util_LatencyTest2Reader.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Util_Render_Stereo.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Util_SystemGUI.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Util_SystemInfo.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Tracking\Tracking_SensorStateReader.cpp">
+      <Filter>Tracking</Filter>
+    </ClCompile>
+    <ClCompile Include="Service\Service_NetClient.cpp">
+      <Filter>Service</Filter>
+    </ClCompile>
+    <ClCompile Include="Service\Service_NetSessionCommon.cpp">
+      <Filter>Service</Filter>
+    </ClCompile>
+    <ClCompile Include="Net\OVR_BitStream.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Net\OVR_NetworkPlugin.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Net\OVR_PacketizedTCPSocket.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Net\OVR_RPC1.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Net\OVR_Session.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Net\OVR_Socket.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Net\OVR_Win32_Socket.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_Alg.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_Allocator.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_Atomic.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_CRC32.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_DebugHelp.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_File.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_FileFILE.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_Lockless.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_Log.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_Math.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_RefCount.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_SharedMemory.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_Std.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_String.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_String_FormatUtil.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_String_PathUtil.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_SysFile.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_System.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_ThreadCommandQueue.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_ThreadsWinAPI.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_Timer.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel\OVR_UTF8Util.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="Displays\OVR_Display.cpp">
+      <Filter>Displays</Filter>
+    </ClCompile>
+    <ClCompile Include="Displays\OVR_Win32_Display.cpp">
+      <Filter>Displays</Filter>
+    </ClCompile>
+    <ClCompile Include="Displays\OVR_Win32_FocusReader.cpp">
+      <Filter>Displays</Filter>
+    </ClCompile>
+    <ClCompile Include="Displays\OVR_Win32_RenderShim.cpp">
+      <Filter>Displays</Filter>
+    </ClCompile>
+    <ClCompile Include="Displays\OVR_Win32_ShimFunctions.cpp">
+      <Filter>Displays</Filter>
+    </ClCompile>
+    <ClCompile Include="CAPI\CAPI_DistortionRenderer.cpp">
+      <Filter>CAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="CAPI\CAPI_FrameTimeManager.cpp">
+      <Filter>CAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="CAPI\CAPI_HMDRenderState.cpp">
+      <Filter>CAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="CAPI\CAPI_HMDState.cpp">
+      <Filter>CAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="CAPI\CAPI_HSWDisplay.cpp">
+      <Filter>CAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="CAPI\CAPI_LatencyStatistics.cpp">
+      <Filter>CAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="CAPI\GL\CAPI_GL_DistortionRenderer.cpp">
+      <Filter>CAPI\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="CAPI\GL\CAPI_GL_HSWDisplay.cpp">
+      <Filter>CAPI\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="CAPI\GL\CAPI_GL_Util.cpp">
+      <Filter>CAPI\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="CAPI\GL\CAPI_GLE.cpp">
+      <Filter>CAPI\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="CAPI\D3D9\CAPI_D3D9_DistortionRenderer.cpp">
+      <Filter>CAPI\D3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="CAPI\D3D9\CAPI_D3D9_HSWDisplay.cpp">
+      <Filter>CAPI\D3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="CAPI\D3D9\CAPI_D3D9_Util.cpp">
+      <Filter>CAPI\D3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="CAPI\D3D1X\CAPI_D3D1X_DistortionRenderer.cpp">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="CAPI\D3D1X\CAPI_D3D1X_HSWDisplay.cpp">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="CAPI\D3D1X\CAPI_D3D10_DistortionRenderer.cpp">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="CAPI\D3D1X\CAPI_D3D10_HSWDisplay.cpp">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="CAPI\D3D1X\CAPI_D3D11_DistortionRenderer.cpp">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="CAPI\D3D1X\CAPI_D3D11_HSWDisplay.cpp">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="CAPI\D3D1X\CAPI_D3D1X_Util.cpp">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Util">
+      <UniqueIdentifier>{ee660e9e-9064-4563-bdda-e95238552a70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tracking">
+      <UniqueIdentifier>{f3aff82e-cab0-482f-95e0-ffb9e01aa79e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Service">
+      <UniqueIdentifier>{f1873781-7216-447b-9163-b45f708a93fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sensors">
+      <UniqueIdentifier>{13f62406-5c4e-4147-a012-92bb3deb71be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net">
+      <UniqueIdentifier>{40101ef6-e5e6-4a4f-8b49-4b39e887f64d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Displays">
+      <UniqueIdentifier>{913bcbad-44ea-418e-a64a-d525291650f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CAPI">
+      <UniqueIdentifier>{a1da73a2-142f-4fee-899b-05d9bc17efdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CAPI\D3D1X">
+      <UniqueIdentifier>{5b058e64-2354-4d46-8f74-fb189a0ffe64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CAPI\D3D1X\Shaders">
+      <UniqueIdentifier>{78b02372-53f5-4fa1-bd32-e43cea67b69a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CAPI\D3D9">
+      <UniqueIdentifier>{14e08d94-36ac-4a70-ba88-80416326eff3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CAPI\GL">
+      <UniqueIdentifier>{6df6bdba-4ce9-4339-8415-7199ca8fc2a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CAPI\Textures">
+      <UniqueIdentifier>{e1118e03-e2e2-457e-ad36-b8658900c20b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kernel">
+      <UniqueIdentifier>{56be014f-983a-4e00-ad41-1bd995eeea00}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CAPI\D3D1X\Shaders\bin2header.exe">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </None>
+    <None Include="CAPI\D3D1X\Shaders\Distortion_ps.psh">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </None>
+    <None Include="CAPI\D3D1X\Shaders\Distortion_vs.vsh">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </None>
+    <None Include="CAPI\D3D1X\Shaders\DistortionChroma_ps.psh">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </None>
+    <None Include="CAPI\D3D1X\Shaders\DistortionChroma_vs.vsh">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </None>
+    <None Include="CAPI\D3D1X\Shaders\DistortionCS2x2.csh">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </None>
+    <None Include="CAPI\D3D1X\Shaders\DistortionTimewarp_vs.vsh">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </None>
+    <None Include="CAPI\D3D1X\Shaders\DistortionTimewarpChroma_vs.vsh">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </None>
+    <None Include="CAPI\D3D1X\Shaders\genComputeShaderHeader.bat">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </None>
+    <None Include="CAPI\D3D1X\Shaders\genPixelShaderHeader.bat">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </None>
+    <None Include="CAPI\D3D1X\Shaders\genVertexShaderHeader.bat">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </None>
+    <None Include="CAPI\D3D1X\Shaders\ShaderReflector.exe">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </None>
+    <None Include="CAPI\D3D1X\Shaders\ShaderReflector.pdb">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </None>
+    <None Include="CAPI\D3D1X\Shaders\SimpleQuad_ps.psh">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </None>
+    <None Include="CAPI\D3D1X\Shaders\SimpleQuad_vs.vsh">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </None>
+    <None Include="CAPI\D3D1X\Shaders\SimpleTexturedQuad_ps.psh">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </None>
+    <None Include="CAPI\D3D1X\Shaders\SimpleTexturedQuad_vs.vsh">
+      <Filter>CAPI\D3D1X\Shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>
