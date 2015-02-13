@@ -570,7 +570,7 @@
       <UniqueIdentifier>{56be014f-983a-4e00-ad41-1bd995eeea00}</UniqueIdentifier>
     </Filter>
     <Filter Include="Images">
-      <UniqueIdentifier>{11c33f41-1c01-4907-8581-cf7b472e51ad}</UniqueIdentifier>
+      <UniqueIdentifier>{db55d288-c2f7-47ba-9470-1ad38cafe032}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -627,7 +627,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\Users\kptg125\Desktop\Screenshot.png">
+    <Image Include="Images\Screenshot.png">
       <Filter>Images</Filter>
     </Image>
   </ItemGroup>

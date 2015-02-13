@@ -237,7 +237,7 @@
     <None Include="CAPI\D3D1X\Shaders\SimpleTexturedQuad_vs.vsh" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\Users\kptg125\Desktop\Screenshot.png" />
+    <Image Include="Images\Screenshot.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6E5E35A2-7A3B-4671-AD85-B39DC5D710C9}</ProjectGuid>
