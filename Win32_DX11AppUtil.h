@@ -481,7 +481,7 @@ bool DirectX11::InitWindowAndDevice(HINSTANCE hinst, Recti vp, bool windowed)
 
     RECT winSize = { 0, 0, vp.w / sizeDivisor, vp.h / sizeDivisor};
     AdjustWindowRect(&winSize, wsStyle, false);
-    Window = CreateWindowW(L"OVRAppWindow", L"OculusRoomTiny",wsStyle |WS_VISIBLE,
+    Window = CreateWindowW(L"OVRAppWindow", L"MolyRift",wsStyle |WS_VISIBLE,
                          vp.x, vp.y, winSize.right-winSize.left, winSize.bottom-winSize.top,
                          NULL, NULL, hinst, NULL);
 
