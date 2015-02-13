@@ -95,9 +95,6 @@
     <ClCompile Include="Util\Util_SystemInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="app.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="BodyBasics.rc" />
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +235,9 @@
     <None Include="CAPI\D3D1X\Shaders\SimpleQuad_vs.vsh" />
     <None Include="CAPI\D3D1X\Shaders\SimpleTexturedQuad_ps.psh" />
     <None Include="CAPI\D3D1X\Shaders\SimpleTexturedQuad_vs.vsh" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Users\kptg125\Desktop\Screenshot.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6E5E35A2-7A3B-4671-AD85-B39DC5D710C9}</ProjectGuid>

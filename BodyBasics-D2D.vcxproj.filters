@@ -334,9 +334,6 @@
     <ResourceCompile Include="BodyBasics.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="app.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="MolyRift.cpp" />
     <ClCompile Include="OVR_CAPI.cpp" />
     <ClCompile Include="OVR_JSON.cpp" />
@@ -572,6 +569,9 @@
     <Filter Include="Kernel">
       <UniqueIdentifier>{56be014f-983a-4e00-ad41-1bd995eeea00}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Images">
+      <UniqueIdentifier>{11c33f41-1c01-4907-8581-cf7b472e51ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CAPI\D3D1X\Shaders\bin2header.exe">
@@ -625,5 +625,10 @@
     <None Include="CAPI\D3D1X\Shaders\SimpleTexturedQuad_vs.vsh">
       <Filter>CAPI\D3D1X\Shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Users\kptg125\Desktop\Screenshot.png">
+      <Filter>Images</Filter>
+    </Image>
   </ItemGroup>
 </Project>
