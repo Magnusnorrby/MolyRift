@@ -237,6 +237,9 @@
     <None Include="CAPI\D3D1X\Shaders\SimpleTexturedQuad_vs.vsh" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="MolTest.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <Image Include="Images\Screenshot.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

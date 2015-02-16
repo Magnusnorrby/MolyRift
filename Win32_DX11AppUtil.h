@@ -25,12 +25,19 @@ limitations under the License.
 #include <math.h>
 using namespace OVR;
 
-// for debugging
+
 #include <iostream>
 #include <windows.h>
 #include <string>
+#include <vector>
+#include <sstream>
+#include <fstream>
+#include <hash_map>
 
 //---------------------------------------------------------------------
+
+
+
 struct DirectX11
 {
     HWND                     Window;
@@ -281,7 +288,7 @@ struct Model
         float     U, V;
     };
 
-	static const int          maxSize = 20000;
+	static const int          maxSize = 100000;
     Vector3f     Pos;
     Quatf        Rot;
     Matrix4f     Mat;
@@ -382,8 +389,6 @@ struct Model
 
 		// the direction of the bond
 		Vector3f rotation = Vector3f(x1, y1, z1).Cross(Vector3f(x2, y2, z2));
-		std::string s = "\nVinkel: " + std::to_string(rotation.Angle(Vector3f(1,1,1)));
-		OutputDebugStringA(s.c_str());
 		rotation.Normalize();
 
 		for (uint16_t i = 0; i < resolution; i++){
@@ -435,48 +440,101 @@ struct Scene
     void    Add(Model * n)
     { Models[num_models++] = n; }    
 
-    Scene(int reducedVersion) : num_models(0) // Main world
-    {
-        D3D11_INPUT_ELEMENT_DESC ModelVertexDesc[] =
-        {   {"Position", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Model::Vertex, Pos),   D3D11_INPUT_PER_VERTEX_DATA, 0},
-            {"Color",    0, DXGI_FORMAT_R8G8B8A8_UNORM,  0, offsetof(Model::Vertex, C),     D3D11_INPUT_PER_VERTEX_DATA, 0},
-            {"TexCoord", 0, DXGI_FORMAT_R32G32_FLOAT,    0, offsetof(Model::Vertex, U),     D3D11_INPUT_PER_VERTEX_DATA, 0},    };
+	Scene(int reducedVersion) : num_models(0) // Main world
+	{
+		D3D11_INPUT_ELEMENT_DESC ModelVertexDesc[] =
+		{ { "Position", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Model::Vertex, Pos), D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "Color", 0, DXGI_FORMAT_R8G8B8A8_UNORM, 0, offsetof(Model::Vertex, C), D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "TexCoord", 0, DXGI_FORMAT_R32G32_FLOAT, 0, offsetof(Model::Vertex, U), D3D11_INPUT_PER_VERTEX_DATA, 0 }, };
 
-        char* VertexShaderSrc =
-            "float4x4 Proj, View;"
-            "float4 NewCol;"
-            "void main(in  float4 Position  : POSITION,    in  float4 Color : COLOR0, in  float2 TexCoord  : TEXCOORD0,"
-            "          out float4 oPosition : SV_Position, out float4 oColor: COLOR0, out float2 oTexCoord : TEXCOORD0)"
-            "{   oPosition = mul(Proj, mul(View, Position)); oTexCoord = TexCoord; oColor = Color; }";
-        char* PixelShaderSrc =
-            "Texture2D Texture   : register(t0); SamplerState Linear : register(s0); "
-            "float4 main(in float4 Position : SV_Position, in float4 Color: COLOR0, in float2 TexCoord : TEXCOORD0) : SV_Target"
-            "{   return Color * Texture.Sample(Linear, TexCoord); }";
- 
-        // Construct textures
-        static Model::Color tex_pixels[4][256*256];
-        ShaderFill * generated_texture[4];
+		char* VertexShaderSrc =
+			"float4x4 Proj, View;"
+			"float4 NewCol;"
+			"void main(in  float4 Position  : POSITION,    in  float4 Color : COLOR0, in  float2 TexCoord  : TEXCOORD0,"
+			"          out float4 oPosition : SV_Position, out float4 oColor: COLOR0, out float2 oTexCoord : TEXCOORD0)"
+			"{   oPosition = mul(Proj, mul(View, Position)); oTexCoord = TexCoord; oColor = Color; }";
+		char* PixelShaderSrc =
+			"Texture2D Texture   : register(t0); SamplerState Linear : register(s0); "
+			"float4 main(in float4 Position : SV_Position, in float4 Color: COLOR0, in float2 TexCoord : TEXCOORD0) : SV_Target"
+			"{   return Color * Texture.Sample(Linear, TexCoord); }";
 
-        for (int k=0;k<4;k++)
-        {
-            for (int j = 0; j < 256; j++)
-            for (int i = 0; i < 256; i++)
-            {
-                if (k==0) tex_pixels[0][j*256+i] = (((i >> 7) ^ (j >> 7)) & 1) ? Model::Color(180,180,180,255) : Model::Color(80,80,80,255);// floor
-                if (k==1) tex_pixels[1][j*256+i] = (((j/4 & 15) == 0) || (((i/4 & 15) == 0) && ((((i/4 & 31) == 0) ^ ((j/4 >> 4) & 1)) == 0))) ?
-                                                   Model::Color(60,60,60,255) : Model::Color(180,180,180,255); //wall
-                if (k==2) tex_pixels[2][j*256+i] = (i/4 == 0 || j/4 == 0) ? Model::Color(80,80,80,255) : Model::Color(180,180,180,255);// ceiling
-                if (k==3) tex_pixels[3][j*256+i] = Model::Color(128,128,128,255);// blank
-            }
-            ImageBuffer * t      = new ImageBuffer(false,false,Sizei(256,256),8,(unsigned char *)tex_pixels[k]);
-            generated_texture[k] = new ShaderFill(ModelVertexDesc,3,VertexShaderSrc,PixelShaderSrc,t);
-        }
-         //Construct Molecule
-		Model * m = new Model(Vector3f(0, 0, 0), generated_texture[3]); 
-		m->AddSolidColorSphere(3.0f, 3.0f, 0.5f, 0.5f, Model::Color(250, 64, 64)); //Atoms
-		m->AddSolidColorSphere(5.0f, 5.0f, 0.5f, 1.0f, Model::Color(0, 64, 64)); 
-		m->AddSolidColorSphere(6.0f, 4.0f, 0.5f, 0.3f, Model::Color(0, 145, 64)); 
-		m->AllocateBuffers(); Add(m);
+		// Construct textures
+		static Model::Color tex_pixels[4][256 * 256];
+		ShaderFill * generated_texture[4];
+
+		for (int k = 0; k < 4; k++)
+		{
+			for (int j = 0; j < 256; j++)
+				for (int i = 0; i < 256; i++)
+				{
+					if (k == 0) tex_pixels[0][j * 256 + i] = (((i >> 7) ^ (j >> 7)) & 1) ? Model::Color(180, 180, 180, 255) : Model::Color(80, 80, 80, 255);// floor
+					if (k == 1) tex_pixels[1][j * 256 + i] = (((j / 4 & 15) == 0) || (((i / 4 & 15) == 0) && ((((i / 4 & 31) == 0) ^ ((j / 4 >> 4) & 1)) == 0))) ?
+						Model::Color(60, 60, 60, 255) : Model::Color(180, 180, 180, 255); //wall
+					if (k == 2) tex_pixels[2][j * 256 + i] = (i / 4 == 0 || j / 4 == 0) ? Model::Color(80, 80, 80, 255) : Model::Color(180, 180, 180, 255);// ceiling
+					if (k == 3) tex_pixels[3][j * 256 + i] = Model::Color(128, 128, 128, 255);// blank
+				}
+			ImageBuffer * t = new ImageBuffer(false, false, Sizei(256, 256), 8, (unsigned char *)tex_pixels[k]);
+			generated_texture[k] = new ShaderFill(ModelVertexDesc, 3, VertexShaderSrc, PixelShaderSrc, t);
+		}
+
+		
+		std::hash_map<std::string, Model::Color> atomColor; //Dont' max out colors since we use a variation formula later to give them depth
+		atomColor["C"] = Model::Color(30, 30, 30, 255); atomColor["H"] = Model::Color(230, 230, 230, 255); atomColor["O"] = Model::Color(230, 0, 0, 255); atomColor["N"] = Model::Color(0, 0, 230, 255);
+		atomColor["I"] = Model::Color(60, 0, 180, 255);
+
+		std::hash_map<std::string, float> radius;
+		radius["H"] = 1.2f; radius["LI"] = 1.82f; radius["NA"] = 2.27f; radius["K"] = 2.75f; radius["C"] = 1.7f; radius["N"] = 1.55f; radius["O"] = 1.52f;
+		radius["F"] = 1.47f; radius["P"] = 1.80f; radius["S"] = 1.80f; radius["CL"] = 1.75f; radius["BR"] = 1.85f; radius["SE"] = 1.90f;
+		radius["ZN"] = 1.39f; radius["CU"] = 1.4f; radius["NI"] = 1.63f; radius["HE"] = 1.4f; radius["NE"] = 1.54f; radius["MG"] = 1.73f;
+		radius["SI"] = 2.1f; radius["AR"] = 1.88f; radius["GA"] = 1.87f; radius["AS"] = 1.85f; radius["KR"] = 2.02f; radius["PD"] = 1.63f; radius["FE"] = 1.94f;
+		radius["AG"] = 1.72f; radius["CD"] = 1.58f; radius["IN"] = 1.93f; radius["SN"] = 2.17f; radius["TE"] = 2.06f; radius["I"] = 1.98f; radius["XE"] = 2.16f;
+		radius["PT"] = 1.75f; radius["AU"] = 1.66f; radius["HG"] = 1.55f; radius["TL"] = 1.96f; radius["PB"] = 2.02f; radius["U"] = 1.86f;
+
+		//Construct an empty model for the molecule
+		Model * m = new Model(Vector3f(0, 0, 0), generated_texture[3]);
+
+		//Read molecule from file
+		std::ifstream file("MolTest.txt");
+		std::string line;
+		while (std::getline(file, line)){
+			std::vector<std::string> vector;
+			std::stringstream ss(line);
+			std::string buffer;
+			
+			while (ss >> buffer){
+				vector.push_back(buffer);
+			}
+
+			if (vector[0].compare("HETATM")==0){ // we found a atom
+				std::string atomType = vector[2];
+
+				Model::Color c;
+				if (atomColor.find(atomType) != atomColor.end()){ // we found a radius
+					c = atomColor[atomType];
+
+				}
+				else{
+					c = Model::Color(250, 64, 64); //default color
+				}
+
+				float r;
+				if (radius.find(atomType) != radius.end()){ // we found a radius
+					r = radius[atomType];
+				}
+				else{
+					r = 1.5f; //default value
+				}
+
+				m->AddSolidColorSphere(std::stof(vector[3]), std::stof(vector[4]), std::stof(vector[5]), r, c); //add atom
+			}
+		}
+
+
+       
+		//m->AddSolidColorSphere(3.0f, 3.0f, 0.5f, 0.5f, Model::Color(250, 64, 64)); //Atoms
+		//m->AddSolidColorSphere(5.0f, 5.0f, 0.5f, 1.0f, Model::Color(0, 64, 64)); 
+		//m->AddSolidColorSphere(6.0f, 4.0f, 0.5f, 0.3f, Model::Color(0, 145, 64)); 
+		m->AllocateBuffers(); Add(m); // add the molecule 
  
 		//Construc Floor
         m = new Model(Vector3f(0,0,0),generated_texture[0]);  

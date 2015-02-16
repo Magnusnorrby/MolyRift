@@ -627,6 +627,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="MolTest.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <Image Include="Images\Screenshot.png">
       <Filter>Images</Filter>
     </Image>
