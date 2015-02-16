@@ -25,6 +25,11 @@ limitations under the License.
 #include <math.h>
 using namespace OVR;
 
+// for debugging
+#include <iostream>
+#include <windows.h>
+#include <string>
+
 //---------------------------------------------------------------------
 struct DirectX11
 {
@@ -276,7 +281,7 @@ struct Model
         float     U, V;
     };
 
-	static const int          maxSize = 10000;
+	static const int          maxSize = 20000;
     Vector3f     Pos;
     Quatf        Rot;
     Matrix4f     Mat;
@@ -290,7 +295,7 @@ struct Model
     Matrix4f& GetMatrix()                           { Mat = Matrix4f(Rot); Mat = Matrix4f::Translation(Pos) * Mat; return Mat;   }
     void AddVertex(const Vertex& v)                 { Vertices[numVertices++] = v; OVR_ASSERT(numVertices<maxSize); }
     void AddIndex(uint16_t a)                       { Indices[numIndices++] = a;   OVR_ASSERT(numIndices<maxSize);  }
-
+	void Rotate(Quatf q)                            { Rot = q * Rot;  }
     void AllocateBuffers()
     {
         VertexBuffer = new DataBuffer(D3D11_BIND_VERTEX_BUFFER, &Vertices[0], numVertices * sizeof(Vertex));
@@ -323,16 +328,7 @@ struct Model
         for(int v = 0; v < 24; v++)
         {
             Vertex vvv; vvv.Pos = Vert[v][0];  vvv.U = Vert[v][1].x; vvv.V = Vert[v][1].y;
-            float dist1 = (vvv.Pos - Vector3f(-2,4,-2)).Length();
-            float dist2 = (vvv.Pos - Vector3f(3,4,-3)).Length();
-            float dist3 = (vvv.Pos - Vector3f(-4,3,25)).Length();
-            int   bri   = rand() % 160;
-            float RRR   = c.R * (bri + 192.0f*(0.65f + 8/dist1 + 1/dist2 + 4/dist3)) / 255.0f;
-            float GGG   = c.G * (bri + 192.0f*(0.65f + 8/dist1 + 1/dist2 + 4/dist3)) / 255.0f;
-            float BBB   = c.B * (bri + 192.0f*(0.65f + 8/dist1 + 1/dist2 + 4/dist3)) / 255.0f;
-            vvv.C.R = RRR > 255 ? 255: (unsigned char) RRR;
-            vvv.C.G = GGG > 255 ? 255: (unsigned char) GGG;
-            vvv.C.B = BBB > 255 ? 255: (unsigned char) BBB;
+			vvv = PaintVertex(vvv, c);
             AddVertex(vvv);
         }
     }
@@ -355,32 +351,77 @@ struct Model
 			}
 		}
 
-		// draw the spehere
+		// draw the sphere
 		for (int i = 0; i <= resolution; i++){
-			float angle1 = (i * M_PI * 2) / resolution;
+			float angle1 = i * M_PI * 2 / resolution;
 			
 			for (int j = 0; j <= resolution; j++){
-				float angle2 = (j * M_PI * 2) / resolution - M_PI;
+				float angle2 = j * M_PI * 2 / resolution - M_PI;
 
 				Vector3f Vert = Vector3f(cos(angle1)*sin(angle2)*r+x, cos(angle2)*r+y, sin(angle1)*sin(angle2)*r+z);
 				Vertex v; v.Pos = Vert; v.U = angle1; v.V = angle2; 
 
-				float dist1 = (v.Pos - Vector3f(-2, 4, -2)).Length();
-				float dist2 = (v.Pos - Vector3f(3, 4, -3)).Length();
-				float dist3 = (v.Pos - Vector3f(-4, 3, 25)).Length();
-				int   bri = rand() % 160;
-				float RRR = c.R * (bri + 192.0f*(0.65f + 8 / dist1 + 1 / dist2 + 4 / dist3)) / 255.0f;
-				float GGG = c.G * (bri + 192.0f*(0.65f + 8 / dist1 + 1 / dist2 + 4 / dist3)) / 255.0f;
-				float BBB = c.B * (bri + 192.0f*(0.65f + 8 / dist1 + 1 / dist2 + 4 / dist3)) / 255.0f;
-				v.C.R = RRR > 255 ? 255 : (unsigned char)RRR;
-				v.C.G = GGG > 255 ? 255 : (unsigned char)GGG;
-				v.C.B = BBB > 255 ? 255 : (unsigned char)BBB;
+				v = PaintVertex(v, c);
 
 				AddVertex(v);
 			}
 		}
 
 
+	}
+
+	void Model::AddSolidBond(float x1, float y1, float z1, float x2, float y2, float z2){
+		Color c = Model::Color(255, 255, 255, 255); //All bonds are white
+		int resolution = 8;
+		float r = 0.05f;
+		float length = sqrt( pow(x1-x2,2) + pow(y1-y2,2) + pow(z1-z2,2))/2;
+		float middleX = (x1 - x2) / 2 + x2;
+		float middleY = (y1 - y2) / 2 + y2;
+		float middleZ = (z1 - z2) / 2 + z2;
+
+
+		// the direction of the bond
+		Vector3f rotation = Vector3f(x1, y1, z1).Cross(Vector3f(x2, y2, z2));
+		std::string s = "\nVinkel: " + std::to_string(rotation.Angle(Vector3f(1,1,1)));
+		OutputDebugStringA(s.c_str());
+		rotation.Normalize();
+
+		for (uint16_t i = 0; i < resolution; i++){
+			AddIndex(i * 2 + numVertices);
+			AddIndex(i * 2 + 1 + numVertices);
+			AddIndex((i+1) * 2 + numVertices);
+
+			AddIndex((i+1) * 2 + numVertices);
+			AddIndex(i * 2 + 1 + numVertices);
+			AddIndex((i+1) * 2 + 1 + numVertices);
+		}
+
+		for (int i = 0; i <= resolution; i++){
+			float angle = i * M_PI * 2 / resolution;
+
+			//rotate the vector with cross multiplication and add the position
+			Vector3f Vert = (Vector3f(cos(angle)*r, sin(angle)*r, +length)).Cross(rotation) + Vector3f(middleX,middleY,middleZ);
+			Vertex v; v.Pos = Vert; v.U = float(i); v.V = float(+length); v.C = c;
+			AddVertex(v);
+
+			Vert = Vector3f(cos(angle)*r, sin(angle)*r, -length).Cross(rotation) + Vector3f(middleX, middleY, middleZ);
+			v.Pos = Vert; v.U = float(i); v.V = float(-length); v.C = c;
+			AddVertex(v);
+		}
+	}
+
+	Vertex Model::PaintVertex(Vertex v, Color c){
+		float dist1 = (v.Pos - Vector3f(-2, 4, -2)).Length();
+		float dist2 = (v.Pos - Vector3f(3, 4, -3)).Length();
+		float dist3 = (v.Pos - Vector3f(-4, 3, 25)).Length();
+		int   bri = rand() % 160;
+		float RRR = c.R * (bri + 192.0f*(0.65f + 8 / dist1 + 1 / dist2 + 4 / dist3)) / 255.0f;
+		float GGG = c.G * (bri + 192.0f*(0.65f + 8 / dist1 + 1 / dist2 + 4 / dist3)) / 255.0f;
+		float BBB = c.B * (bri + 192.0f*(0.65f + 8 / dist1 + 1 / dist2 + 4 / dist3)) / 255.0f;
+		v.C.R = RRR > 255 ? 255 : (unsigned char)RRR;
+		v.C.G = GGG > 255 ? 255 : (unsigned char)GGG;
+		v.C.B = BBB > 255 ? 255 : (unsigned char)BBB;
+		return v;
 	}
 
 	
@@ -430,19 +471,16 @@ struct Scene
             ImageBuffer * t      = new ImageBuffer(false,false,Sizei(256,256),8,(unsigned char *)tex_pixels[k]);
             generated_texture[k] = new ShaderFill(ModelVertexDesc,3,VertexShaderSrc,PixelShaderSrc,t);
         }
-        // Construct geometry
-        //Model * m = new Model(Vector3f(0,0,0),generated_texture[2]);  // Moving box
-        //m->AddSolidColorBox( 0, 0, 0,  +1.0f,  +1.0f, 1.0f,  Model::Color(250,64,64)); 
-        //m->AllocateBuffers(); Add(m);
-
-
-		Model * m = new Model(Vector3f(0, 0, 0), generated_texture[3]); //Atom
-		m->AddSolidColorSphere(3.0f, 3.0f, 0.0f, 0.5f, Model::Color(250, 64, 64));
-		m->AddSolidColorSphere(5.0f, 5.0f, 0.0f, 1.0f, Model::Color(0, 64, 64));
+         //Construct Molecule
+		Model * m = new Model(Vector3f(0, 0, 0), generated_texture[3]); 
+		m->AddSolidColorSphere(3.0f, 3.0f, 0.5f, 0.5f, Model::Color(250, 64, 64)); //Atoms
+		m->AddSolidColorSphere(5.0f, 5.0f, 0.5f, 1.0f, Model::Color(0, 64, 64)); 
+		m->AddSolidColorSphere(6.0f, 4.0f, 0.5f, 0.3f, Model::Color(0, 145, 64)); 
 		m->AllocateBuffers(); Add(m);
  
-        m = new Model(Vector3f(0,0,0),generated_texture[0]);  // Floors
-        m->AddSolidColorBox( -10.0f,  -0.1f,  -20.0f,  10.0f,  0.0f, 20.1f,  Model::Color(128,128,128)); // Floor
+		//Construc Floor
+        m = new Model(Vector3f(0,0,0),generated_texture[0]);  
+        m->AddSolidColorBox( -10.0f,  -0.1f,  -20.0f,  10.0f,  0.0f, 20.1f,  Model::Color(128,128,128)); 
         m->AllocateBuffers(); Add(m);
 
         if (reducedVersion) return;
