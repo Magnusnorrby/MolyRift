@@ -339,7 +339,7 @@ struct Model
 
 	void Model::AddSolidColorSphere(float x, float y, float z, float r, Color c){
 		float i = M_PI;
-		int resolution = 32;
+		int resolution = 16;
 		int r2 = resolution + 1;
 
 		//add indices
@@ -362,8 +362,8 @@ struct Model
 			for (int j = 0; j <= resolution; j++){
 				float angle2 = (j * M_PI * 2) / resolution - M_PI;
 
-				Vector3f Vert = Vector3f(cos(angle1)*sin(angle2)+x, cos(angle2)+y, sin(angle1)*sin(angle2)+z);
-				Vertex v; v.Pos = Vert*r; v.U = angle1; v.V = angle2; 
+				Vector3f Vert = Vector3f(cos(angle1)*sin(angle2)*r+x, cos(angle2)*r+y, sin(angle1)*sin(angle2)*r+z);
+				Vertex v; v.Pos = Vert; v.U = angle1; v.V = angle2; 
 
 				float dist1 = (v.Pos - Vector3f(-2, 4, -2)).Length();
 				float dist2 = (v.Pos - Vector3f(3, 4, -3)).Length();
@@ -382,6 +382,8 @@ struct Model
 
 
 	}
+
+	
 };
 //------------------------------------------------------------------------- 
 struct Scene  
@@ -436,6 +438,7 @@ struct Scene
 
 		Model * m = new Model(Vector3f(0, 0, 0), generated_texture[3]); //Atom
 		m->AddSolidColorSphere(3.0f, 3.0f, 0.0f, 0.5f, Model::Color(250, 64, 64));
+		m->AddSolidColorSphere(5.0f, 5.0f, 0.0f, 1.0f, Model::Color(0, 64, 64));
 		m->AllocateBuffers(); Add(m);
  
         m = new Model(Vector3f(0,0,0),generated_texture[0]);  // Floors
