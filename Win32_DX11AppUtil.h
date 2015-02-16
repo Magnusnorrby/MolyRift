@@ -20,6 +20,9 @@ limitations under the License.
 #include "Kernel/OVR_Math.h"
 #include <d3d11.h>
 #include <d3dcompiler.h>
+
+#define _USE_MATH_DEFINES
+#include <math.h>
 using namespace OVR;
 
 //---------------------------------------------------------------------
@@ -273,19 +276,20 @@ struct Model
         float     U, V;
     };
 
+	static const int          maxSize = 10000;
     Vector3f     Pos;
     Quatf        Rot;
     Matrix4f     Mat;
     int          numVertices, numIndices;
-    Vertex       Vertices[2000]; //Note fixed maximum
-    uint16_t     Indices[2000];
+    Vertex       Vertices[maxSize]; //Note fixed maximum
+    uint16_t     Indices[maxSize];
     ShaderFill * Fill;
     DataBuffer * VertexBuffer, * IndexBuffer;  
    
     Model(Vector3f arg_pos, ShaderFill * arg_Fill ) { numVertices=0;numIndices=0;Pos = arg_pos; Fill = arg_Fill; }
     Matrix4f& GetMatrix()                           { Mat = Matrix4f(Rot); Mat = Matrix4f::Translation(Pos) * Mat; return Mat;   }
-    void AddVertex(const Vertex& v)                 { Vertices[numVertices++] = v; OVR_ASSERT(numVertices<2000); }
-    void AddIndex(uint16_t a)                       { Indices[numIndices++] = a;   OVR_ASSERT(numIndices<2000);  }
+    void AddVertex(const Vertex& v)                 { Vertices[numVertices++] = v; OVR_ASSERT(numVertices<maxSize); }
+    void AddIndex(uint16_t a)                       { Indices[numIndices++] = a;   OVR_ASSERT(numIndices<maxSize);  }
 
     void AllocateBuffers()
     {
@@ -332,6 +336,52 @@ struct Model
             AddVertex(vvv);
         }
     }
+
+	void Model::AddSolidColorSphere(float x, float y, float z, float r, Color c){
+		float i = M_PI;
+		int resolution = 32;
+		int r2 = resolution + 1;
+
+		//add indices
+		for (uint16_t i = 0; i < resolution; i++){
+			for (uint16_t j = 0; j < resolution; j++){
+				AddIndex(i * r2 + j + numVertices);
+				AddIndex((i+1) * r2 + j + numVertices);
+				AddIndex(i * r2 + j + 1 + numVertices);
+
+				AddIndex((i+1) * r2 + j + numVertices);
+				AddIndex((i+1) * r2 + j + 1 + numVertices);
+				AddIndex(i * r2 + j + 1 + numVertices);
+			}
+		}
+
+		// draw the spehere
+		for (int i = 0; i <= resolution; i++){
+			float angle1 = (i * M_PI * 2) / resolution;
+			
+			for (int j = 0; j <= resolution; j++){
+				float angle2 = (j * M_PI * 2) / resolution - M_PI;
+
+				Vector3f Vert = Vector3f(cos(angle1)*sin(angle2)+x, cos(angle2)+y, sin(angle1)*sin(angle2)+z);
+				Vertex v; v.Pos = Vert*r; v.U = angle1; v.V = angle2; 
+
+				float dist1 = (v.Pos - Vector3f(-2, 4, -2)).Length();
+				float dist2 = (v.Pos - Vector3f(3, 4, -3)).Length();
+				float dist3 = (v.Pos - Vector3f(-4, 3, 25)).Length();
+				int   bri = rand() % 160;
+				float RRR = c.R * (bri + 192.0f*(0.65f + 8 / dist1 + 1 / dist2 + 4 / dist3)) / 255.0f;
+				float GGG = c.G * (bri + 192.0f*(0.65f + 8 / dist1 + 1 / dist2 + 4 / dist3)) / 255.0f;
+				float BBB = c.B * (bri + 192.0f*(0.65f + 8 / dist1 + 1 / dist2 + 4 / dist3)) / 255.0f;
+				v.C.R = RRR > 255 ? 255 : (unsigned char)RRR;
+				v.C.G = GGG > 255 ? 255 : (unsigned char)GGG;
+				v.C.B = BBB > 255 ? 255 : (unsigned char)BBB;
+
+				AddVertex(v);
+			}
+		}
+
+
+	}
 };
 //------------------------------------------------------------------------- 
 struct Scene  
@@ -379,15 +429,17 @@ struct Scene
             generated_texture[k] = new ShaderFill(ModelVertexDesc,3,VertexShaderSrc,PixelShaderSrc,t);
         }
         // Construct geometry
-        Model * m = new Model(Vector3f(0,0,0),generated_texture[2]);  // Moving box
-        m->AddSolidColorBox( 0, 0, 0,  +1.0f,  +1.0f, 1.0f,  Model::Color(250,64,64)); 
-        m->AllocateBuffers(); Add(m);
+        //Model * m = new Model(Vector3f(0,0,0),generated_texture[2]);  // Moving box
+        //m->AddSolidColorBox( 0, 0, 0,  +1.0f,  +1.0f, 1.0f,  Model::Color(250,64,64)); 
+        //m->AllocateBuffers(); Add(m);
 
 
+		Model * m = new Model(Vector3f(0, 0, 0), generated_texture[3]); //Atom
+		m->AddSolidColorSphere(3.0f, 3.0f, 0.0f, 0.5f, Model::Color(250, 64, 64));
+		m->AllocateBuffers(); Add(m);
  
         m = new Model(Vector3f(0,0,0),generated_texture[0]);  // Floors
-        m->AddSolidColorBox( -10.0f,  -0.1f,  -20.0f,  10.0f,  0.0f, 20.1f,  Model::Color(128,128,128)); // Main floor
-
+        m->AddSolidColorBox( -10.0f,  -0.1f,  -20.0f,  10.0f,  0.0f, 20.1f,  Model::Color(128,128,128)); // Floor
         m->AllocateBuffers(); Add(m);
 
         if (reducedVersion) return;
