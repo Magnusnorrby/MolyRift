@@ -288,7 +288,7 @@ struct Model
         float     U, V;
     };
 
-	static const int          maxSize = 100000;
+	static const int          maxSize = 1000000;
     Vector3f     Pos;
     Quatf        Rot;
     Matrix4f     Mat;
@@ -342,7 +342,7 @@ struct Model
 
 	void Model::AddSolidColorSphere(float x, float y, float z, float r, Color c){
 		float i = M_PI;
-		int resolution = 16;
+		int resolution = 32;
 		int r2 = resolution + 1;
 
 		//add indices
@@ -388,7 +388,8 @@ struct Model
 
 
 		// the direction of the bond
-		Vector3f rotation = Vector3f(x1, y1, z1).Cross(Vector3f(x2, y2, z2));
+		Vector3f rotation;
+		rotation = Vector3f(x1, y1, z1).Cross(Vector3f(x2, y2, z2));
 		rotation.Normalize();
 
 		for (uint16_t i = 0; i < resolution; i++){
@@ -405,11 +406,13 @@ struct Model
 			float angle = i * M_PI * 2 / resolution;
 
 			//rotate the vector with cross multiplication and add the position
-			Vector3f Vert = (Vector3f(cos(angle)*r, sin(angle)*r, +length)).Cross(rotation) + Vector3f(middleX,middleY,middleZ);
+			Vector3f Vert = (Vector3f(cos(angle)*r, sin(angle)*r, +length)).Cross(rotation);
+			Vert += Vector3f(middleX, middleY, middleZ); // Add the coordinates
 			Vertex v; v.Pos = Vert; v.U = float(i); v.V = float(+length); v.C = c;
 			AddVertex(v);
 
-			Vert = Vector3f(cos(angle)*r, sin(angle)*r, -length).Cross(rotation) + Vector3f(middleX, middleY, middleZ);
+			Vert = Vector3f(cos(angle)*r, sin(angle)*r, -length).Cross(rotation);
+			Vert += Vector3f(middleX, middleY, middleZ); // Add the coordinates
 			v.Pos = Vert; v.U = float(i); v.V = float(-length); v.C = c;
 			AddVertex(v);
 		}
@@ -458,29 +461,27 @@ struct Scene
 			"float4 main(in float4 Position : SV_Position, in float4 Color: COLOR0, in float2 TexCoord : TEXCOORD0) : SV_Target"
 			"{   return Color * Texture.Sample(Linear, TexCoord); }";
 
+		static const int resolution = 1024;
 		// Construct textures
-		static Model::Color tex_pixels[4][256 * 256];
+		static Model::Color tex_pixels[4][resolution * resolution];
 		ShaderFill * generated_texture[4];
 
-		for (int k = 0; k < 4; k++)
+		for (int k = 0; k < 2; k++)
 		{
-			for (int j = 0; j < 256; j++)
-				for (int i = 0; i < 256; i++)
+			for (int j = 0; j < resolution; j++)
+				for (int i = 0; i < resolution; i++)
 				{
-					if (k == 0) tex_pixels[0][j * 256 + i] = (((i >> 7) ^ (j >> 7)) & 1) ? Model::Color(180, 180, 180, 255) : Model::Color(80, 80, 80, 255);// floor
-					if (k == 1) tex_pixels[1][j * 256 + i] = (((j / 4 & 15) == 0) || (((i / 4 & 15) == 0) && ((((i / 4 & 31) == 0) ^ ((j / 4 >> 4) & 1)) == 0))) ?
-						Model::Color(60, 60, 60, 255) : Model::Color(180, 180, 180, 255); //wall
-					if (k == 2) tex_pixels[2][j * 256 + i] = (i / 4 == 0 || j / 4 == 0) ? Model::Color(80, 80, 80, 255) : Model::Color(180, 180, 180, 255);// ceiling
-					if (k == 3) tex_pixels[3][j * 256 + i] = Model::Color(128, 128, 128, 255);// blank
+					if (k == 0) tex_pixels[0][j * resolution + i] = (((i >> 7) ^ (j >> 7)) & 1) ? Model::Color(180, 180, 180, 255) : Model::Color(80, 80, 80, 255);// floor
+					if (k == 1) tex_pixels[1][j * resolution + i] = Model::Color(128, 128, 128, 255);// blank
 				}
-			ImageBuffer * t = new ImageBuffer(false, false, Sizei(256, 256), 8, (unsigned char *)tex_pixels[k]);
+			ImageBuffer * t = new ImageBuffer(false, false, Sizei(resolution, resolution), 8, (unsigned char *)tex_pixels[k]);
 			generated_texture[k] = new ShaderFill(ModelVertexDesc, 3, VertexShaderSrc, PixelShaderSrc, t);
 		}
 
 		
 		std::hash_map<std::string, Model::Color> atomColor; //Dont' max out colors since we use a variation formula later to give them depth
 		atomColor["C"] = Model::Color(30, 30, 30, 255); atomColor["H"] = Model::Color(230, 230, 230, 255); atomColor["O"] = Model::Color(230, 0, 0, 255); atomColor["N"] = Model::Color(0, 0, 230, 255);
-		atomColor["I"] = Model::Color(60, 0, 180, 255);
+		atomColor["I"] = Model::Color(30, 0, 150, 255);
 
 		std::hash_map<std::string, float> radius;
 		radius["H"] = 1.2f; radius["LI"] = 1.82f; radius["NA"] = 2.27f; radius["K"] = 2.75f; radius["C"] = 1.7f; radius["N"] = 1.55f; radius["O"] = 1.52f;
@@ -491,7 +492,7 @@ struct Scene
 		radius["PT"] = 1.75f; radius["AU"] = 1.66f; radius["HG"] = 1.55f; radius["TL"] = 1.96f; radius["PB"] = 2.02f; radius["U"] = 1.86f;
 
 		//Construct an empty model for the molecule
-		Model * m = new Model(Vector3f(0, 0, 0), generated_texture[3]);
+		Model * m = new Model(Vector3f(0, 0, 0), generated_texture[1]);
 
 		//Read molecule from file
 		std::ifstream file("MolTest.txt");
@@ -525,18 +526,12 @@ struct Scene
 					r = 1.5f; //default value
 				}
 
-				m->AddSolidColorSphere(std::stof(vector[3]), std::stof(vector[4]), std::stof(vector[5]), r, c); //add atom
+				m->AddSolidColorSphere(std::stof(vector[3]), std::stof(vector[4]), std::stof(vector[5]), r/1.5, c); //add atom
 			}
-		}
-
-
-       
-		//m->AddSolidColorSphere(3.0f, 3.0f, 0.5f, 0.5f, Model::Color(250, 64, 64)); //Atoms
-		//m->AddSolidColorSphere(5.0f, 5.0f, 0.5f, 1.0f, Model::Color(0, 64, 64)); 
-		//m->AddSolidColorSphere(6.0f, 4.0f, 0.5f, 0.3f, Model::Color(0, 145, 64)); 
+		} 
 		m->AllocateBuffers(); Add(m); // add the molecule 
  
-		//Construc Floor
+		//Construct Floor
         m = new Model(Vector3f(0,0,0),generated_texture[0]);  
         m->AddSolidColorBox( -10.0f,  -0.1f,  -20.0f,  10.0f,  0.0f, 20.1f,  Model::Color(128,128,128)); 
         m->AllocateBuffers(); Add(m);
